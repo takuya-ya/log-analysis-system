@@ -1,0 +1,15 @@
+services:
+  db:
+    build:
+    #context は、Docker イメージをビルドする際の、「ホスト」の現在の作業ディレクトリ（コンテキスト）を指定します。
+      context: .
+      dockerfile: docker/db/Dockerfile
+    ports:
+      - "53306:3306"
+    volumes:
+      - ./docker/db/my.cnf:/etc/mysql/my.cnf
+      - ./docker/db/mysql_data:/var/lib/mysql
+      #env_file で指定されたファイル（例: db-variables.env）内の環境変数が、コンテナの環境変数として設定されます。
+      #コンテナ内のアプリケーション（例: MySQL）が、これらの変数を使用して動作します。
+    env_file:
+      - ./docker/db/db-variables.env
