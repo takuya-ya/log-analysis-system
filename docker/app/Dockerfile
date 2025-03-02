@@ -6,7 +6,8 @@ WORKDIR /var/www/html
 RUN apt-get update \
     && apt-get install -y libonig-dev libzip-dev unzip \
     && docker-php-ext-install mbstring zip bcmath \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install pdo pdo_mysql
 
 
 # # composer のインストール
