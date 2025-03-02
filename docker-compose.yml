@@ -9,7 +9,7 @@ services:
     volumes:
       - ./src/:/var/www/html
     env_file:
-      - .env
+      - src/.env
 
   db:
     build:
