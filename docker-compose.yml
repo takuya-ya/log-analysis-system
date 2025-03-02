@@ -7,16 +7,16 @@ services:
     ports:
       - "53305:3305"
     volumes:
-      - ./src/:var/www/html
+      - ./src/:/var/www/html
     env_file:
-      - ./src/.env
+      - .env
 
   db:
     build:
     #context は、Docker イメージをビルドする際の、「ホスト」の現在の作業ディレクトリ（コンテキスト）を指定します。
       context: .
       dockerfile: docker/db/Dockerfile
-    container_name: db
+    container_name: log_analysis_db
     ports:
       - "53306:3306"
     volumes:
