@@ -1,3 +1,5 @@
 docker/db/mysql_data
 make_sql.sql
 table_columns_datas.sql
+.env
+src/vendor
