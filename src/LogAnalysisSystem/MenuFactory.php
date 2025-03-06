@@ -4,7 +4,7 @@ namespace LogAnalysisSystem;
 
 use LogAnalysisSystem\MenuAction;
 
-class MenuFactry
+class MenuFactory
 {
     public static function createClass(int $menuNum): ?MenuAction
     {
