@@ -5,5 +5,5 @@ namespace LogAnalysisSystem;
 use PDO;
 
 interface MenuAction {
-  public function executeMenu(DBConnector $pdo): array;
+  public function executeMenu(PDO $pdo): array;
 }
