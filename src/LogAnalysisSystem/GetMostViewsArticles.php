@@ -24,6 +24,7 @@ class GetMostViewsArticles implements MenuAction
 
         // 取得する記事の数を設定
         $articlesNum = 3;
+        // 第3引数は省略可能だが、明示することで型の誤認識を防ぐ（ここでは整数型を指定）
         $sth->bindValue(':articlesNum', $articlesNum, PDO::PARAM_INT); // バインド
 
         // SQL を実行
