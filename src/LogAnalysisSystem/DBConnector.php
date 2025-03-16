@@ -18,7 +18,7 @@ class DBConnector
         // PDO のオプション設定
         $option = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // エラーモードを例外（Exception）に設定
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // フェッチモードを連想配列に設定
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // デフォルトのデータ取得形式を連想配列に設定
         ];
 
         try {
