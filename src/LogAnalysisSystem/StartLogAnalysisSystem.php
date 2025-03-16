@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use LogAnalysisSystem\MenuFactory;
 use LogAnalysisSystem\DBConnector;
@@ -19,6 +19,7 @@ $menu = MenuFactory::createClass($selectedMenu);
 
 $pageViews = $menu->executeMenu($pdo);
 
+var_dump($pageViews);
 // foreach($pageViews as $pageView) {
 //   implode()
 // }
