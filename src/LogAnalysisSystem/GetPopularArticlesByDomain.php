@@ -20,7 +20,10 @@ class GetPopularArticlesByDomain implements MenuAction
             domain_code'
         ;
 
-        $domain_code = 'en';
+        echo '取得するデータのドメイン名を入力して下さい。' . PHP_EOL;
+
+        $domain_code = fgets(STDIN);
+
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':domain_code', $domain_code, PDO::PARAM_STR);
 
