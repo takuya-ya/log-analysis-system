@@ -7,7 +7,9 @@ use PDO;
 
 class GetPopularArticlesByDomain implements MenuAction
 {
-    public function executeMenu(PDO $pdo): array
+    private $totalViewByDomain = [];
+
+    public function executeMenu(PDO $pdo): void
     {
         // ドメインコード毎にグループ化し、各ドメインの合計ビュー数を取得する
 
@@ -52,10 +54,8 @@ class GetPopularArticlesByDomain implements MenuAction
         $stmh->execute($params);
 
         // 結果をすべて取得
-        $totalViewByDomain = $stmh->fetchAll();
-
-        // 取得したデータを返す
-        return $totalViewByDomain;
+        $this->totalViewByDomain = $stmh->fetchAll();
     }
+
 
 }
