@@ -7,8 +7,8 @@ use PDO;
 
 class GetMostViewsArticles implements MenuAction
 {
-
-    public function executeMenu(PDO $pdo): array
+    private $pageViews = [];
+    public function executeMenu(PDO $pdo): void
     {
 
         // ビュー数が多い記事を取得する SQL 文
@@ -31,7 +31,13 @@ class GetMostViewsArticles implements MenuAction
         $sth->execute();
 
         // 実行結果をすべて取得（連想配列として）
-        $pageViews = $sth->fetchAll();
-        return $pageViews;
+        $this->pageViews = $sth->fetchAll();
+    }
+
+    public function displayData(): void
+    {
+        foreach($this->pageViews as $pageView) {
+            echo "\"{$pageView['domain_code']}\", \"{$pageView['page_title']}\", {$pageView['view_count']}" . PHP_EOL;
+        }
     }
 }
