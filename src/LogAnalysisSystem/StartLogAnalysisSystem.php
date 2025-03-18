@@ -17,9 +17,8 @@ $selectedMenu = (int)trim(fgets(STDIN));
 
 $menu = MenuFactory::createClass($selectedMenu);
 
-$pageViews = $menu->executeMenu($pdo);
+// データを取得
+$menu->executeMenu($pdo);
 
-var_dump($pageViews);
-// foreach($pageViews as $pageView) {
-//   implode()
-// }
+// 取得データを出力
+$menu->displayData();

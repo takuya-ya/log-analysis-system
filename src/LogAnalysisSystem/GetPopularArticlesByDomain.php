@@ -7,7 +7,7 @@ use PDO;
 
 class GetPopularArticlesByDomain implements MenuAction
 {
-    private $totalViewByDomain = [];
+    private $totalViewsByDomain = [];
 
     public function executeMenu(PDO $pdo): void
     {
@@ -54,8 +54,13 @@ class GetPopularArticlesByDomain implements MenuAction
         $stmh->execute($params);
 
         // 結果をすべて取得
-        $this->totalViewByDomain = $stmh->fetchAll();
+        $this->totalViewsByDomain = $stmh->fetchAll();
     }
 
-
+    // 取得したデータを出力
+    public function displayData(): void {
+        foreach($this->totalViewsByDomain as $pageViewByDomain) {
+            echo "\"{$pageViewByDomain['domain_code']}\", {$pageViewByDomain['SUM(view_count)']}" . PHP_EOL;
+        }
+    }
 }
