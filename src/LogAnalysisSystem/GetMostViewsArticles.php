@@ -36,7 +36,7 @@ class GetMostViewsArticles implements MenuAction
 
     public function displayData(): void
     {
-        foreach($this->pageViews as $pageView) {
+        foreach ($this->pageViews as $pageView) {
             echo "\"{$pageView['domain_code']}\", \"{$pageView['page_title']}\", {$pageView['view_count']}" . PHP_EOL;
         }
     }

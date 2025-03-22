@@ -8,7 +8,7 @@ class MenuFactory
 {
     public static function createClass(int $menuNum): ?MenuAction
     {
-        return match($menuNum) {
+        return match ($menuNum) {
             1 => new GetMostViewsArticles(),
             2 => new GetPopularArticlesByDomain(),
             default => null
