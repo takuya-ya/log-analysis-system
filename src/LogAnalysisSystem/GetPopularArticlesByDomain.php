@@ -58,8 +58,9 @@ class GetPopularArticlesByDomain implements MenuAction
     }
 
     // 取得したデータを出力
-    public function displayData(): void {
-        foreach($this->totalViewsByDomain as $pageViewByDomain) {
+    public function displayData(): void
+    {
+        foreach ($this->totalViewsByDomain as $pageViewByDomain) {
             echo "\"{$pageViewByDomain['domain_code']}\", {$pageViewByDomain['SUM(view_count)']}" . PHP_EOL;
         }
     }
