@@ -10,7 +10,6 @@ class GetMostViewsArticles implements MenuAction
     private $pageViews = [];
     public function executeMenu(PDO $pdo): void
     {
-
         // ビュー数が多い記事を取得する SQL 文
         $sql = 'SELECT domain_code, page_title, view_count
         FROM
@@ -22,10 +21,11 @@ class GetMostViewsArticles implements MenuAction
         // SQL をプリペアドステートメントとして準備
         $sth = $pdo->prepare($sql);
 
+        echo '取得する記事数を入力してください。' . PHP_EOL;
         // 取得する記事の数を設定
-        $articlesNum = 3;
+        $desiredArticleCount = fgets(STDIN);
         // 第3引数は省略可能だが、明示することで型の誤認識を防ぐ（ここでは整数型を指定）
-        $sth->bindValue(':articlesNum', $articlesNum, PDO::PARAM_INT); // バインド
+        $sth->bindValue(':articlesNum', $desiredArticleCount, PDO::PARAM_INT); // バインド
 
         // SQL を実行
         $sth->execute();
