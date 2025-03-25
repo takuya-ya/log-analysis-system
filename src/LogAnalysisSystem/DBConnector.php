@@ -37,6 +37,7 @@ class DBConnector
         }
     }
 
+    // 責任分離の為にメソッドを分離しているが、小規模開発では必須ではない
     public function getPDO(): PDO
     {
         return $this->pdo;
