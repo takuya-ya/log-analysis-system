@@ -11,7 +11,6 @@ class MenuFactory
         return match ($menuNum) {
             1 => new GetMostViewsArticles(),
             2 => new GetPopularArticlesByDomain(),
-            default => null
         };
     }
 }
