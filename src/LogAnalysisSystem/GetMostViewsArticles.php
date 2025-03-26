@@ -18,6 +18,7 @@ class GetMostViewsArticles implements MenuAction
             view_count DESC
         LIMIT :articlesNum';
 
+        // PDOStatement クラスを作成
         // SQL をプリペアドステートメントとして準備
         $sth = $pdo->prepare($sql);
 

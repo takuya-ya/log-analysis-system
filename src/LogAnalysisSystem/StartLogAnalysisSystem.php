@@ -5,6 +5,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use LogAnalysisSystem\MenuFactory;
 use LogAnalysisSystem\DBConnector;
 
+// データベース接続
 $pdo = new DBConnector();
 $pdo = $pdo->getPDO();
 
@@ -23,12 +24,13 @@ if (!ctype_digit($selectedMenu)) {
 
 // 対応していないメニュー番号の場合、matct式によりスロー発生
 try {
+    // 選択番号に応じてインスタンス作成
     $menu = MenuFactory::createClass($selectedMenu);
 } catch (UnhandledMatchError $e) {
     exit('対応していないメニュー番号です。' . PHP_EOL);
 }
 
-// データを取得
+// インスタンスでデータ取得メソッド実行
 $menu->executeMenu($pdo);
 
 // 取得データを出力
