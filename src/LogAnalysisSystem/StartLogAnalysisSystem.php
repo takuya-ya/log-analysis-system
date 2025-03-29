@@ -5,6 +5,9 @@ require __DIR__ . '/../vendor/autoload.php';
 use LogAnalysisSystem\MenuFactory;
 use LogAnalysisSystem\DBConnector;
 
+ini_set('log_errors', 'On');
+ini_set('error_log', __DIR__ . '/log/error.log');
+
 // データベース接続
 $pdo = new DBConnector();
 $pdo = $pdo->getPDO();
@@ -17,9 +20,9 @@ echo '2.ドメインコードの中で人気な記事を検索' . PHP_EOL;
 // echo '9.終了する' . PHP_EOL;
 
 $selectedMenu = trim(fgets(STDIN));
-// 文字列を
+// 数字のみの文字列か判定
 if (!ctype_digit($selectedMenu)) {
-    exit('メニュー番号は半角英数字で入力して下さい。' . PHP_EOL);
+    exit('メニュー番号は数字で入力して下さい。' . PHP_EOL);
 };
 
 // 対応していないメニュー番号の場合、matct式によりスロー発生
@@ -31,7 +34,14 @@ try {
 }
 
 // インスタンスでデータ取得メソッド実行
-$menu->executeMenu($pdo);
+try {
+    $menu->executeMenu($pdo);
+} catch (PDOException $e) {
+    // スタックトレースでエラーの発生行など確認
+    error_log($e->getMessage() . PHP_EOL . $e->getTraceAsString());
+    echo 'DBエラーが発生しました。' . PHP_EOL;
+    exit(1);
+}
 
 // 取得データを出力
 $menu->displayData();
