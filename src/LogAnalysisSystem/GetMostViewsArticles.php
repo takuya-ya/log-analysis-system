@@ -3,6 +3,7 @@
 namespace LogAnalysisSystem;
 
 use LogAnalysisSystem\MenuAction;
+use LogAnalysisSystem\Validator;
 use PDO;
 use PDOException;
 
@@ -24,7 +25,13 @@ class GetMostViewsArticles implements MenuAction
             $sth = $pdo->prepare($sql);
             echo '取得する記事数を入力してください。' . PHP_EOL;
             // 取得する記事の数を設定
-            $desiredArticleCount = fgets(STDIN);
+            $desiredArticleCount = trim(fgets(STDIN));
+            $validator = new Validator();
+            $return = $validator->validateNumeric($desiredArticleCount);
+            if($return) {
+                exit;
+            }
+
             // 第3引数は省略可能だが、明示することで型の誤認識を防ぐ（ここでは整数型を指定）
             $sth->bindValue(':articlesNum', $desiredArticleCount, PDO::PARAM_INT); // バインド
 
