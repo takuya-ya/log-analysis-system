@@ -4,6 +4,7 @@ namespace LogAnalysisSystem;
 
 use LogAnalysisSystem\MenuAction;
 use PDO;
+use PDOException;
 
 class GetMostViewsArticles implements MenuAction
 {
@@ -18,21 +19,20 @@ class GetMostViewsArticles implements MenuAction
             view_count DESC
         LIMIT :articlesNum';
 
-        // PDOStatement クラスを作成
-        // SQL をプリペアドステートメントとして準備
-        $sth = $pdo->prepare($sql);
+            // PDOStatement クラスを作成
+            // SQL を事前解析（静的）し、プリペアドステートメントとして準備。
+            $sth = $pdo->prepare($sql);
+            echo '取得する記事数を入力してください。' . PHP_EOL;
+            // 取得する記事の数を設定
+            $desiredArticleCount = fgets(STDIN);
+            // 第3引数は省略可能だが、明示することで型の誤認識を防ぐ（ここでは整数型を指定）
+            $sth->bindValue(':articlesNum', $desiredArticleCount, PDO::PARAM_INT); // バインド
 
-        echo '取得する記事数を入力してください。' . PHP_EOL;
-        // 取得する記事の数を設定
-        $desiredArticleCount = fgets(STDIN);
-        // 第3引数は省略可能だが、明示することで型の誤認識を防ぐ（ここでは整数型を指定）
-        $sth->bindValue(':articlesNum', $desiredArticleCount, PDO::PARAM_INT); // バインド
+            // SQL を実行
+            $sth->execute();
 
-        // SQL を実行
-        $sth->execute();
-
-        // 実行結果をすべて取得（連想配列として）
-        $this->pageViews = $sth->fetchAll();
+            // 実行結果をすべて取得（連想配列として）
+            $this->pageViews = $sth->fetchAll();
     }
 
     public function displayData(): void
