@@ -3,3 +3,4 @@ make_sql.sql
 table_columns_datas.sql
 .env
 src/vendor
+src/LogAnalysisSystem/log/error.log
